@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mércia Jaynne · Educação Física, pesquisa e código</title>
+<meta name="theme-color" content="#fcfcfc">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Geist+Mono:wght@400;500&family=Caveat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--font-sans:"Inter",system-ui,sans-serif;--font-mono:"Geist Mono",ui-monospace,monospace;--font-hand:"Caveat",cursive;
+--bg:#fcfcfc;--card:#fff;--well:#f4f4f4;--text:#111;--gray:#6f6f6f;--gray-2:#737373;--line:#00000012;--line-2:#0000001f;--ring:#0000000a;--icon:brightness(0) opacity(.7);
+--ease-out:cubic-bezier(.23,1,.32,1);--ease-in-out:cubic-bezier(.77,0,.175,1);--col:644px}
+:root[data-theme=dark]{color-scheme:dark;--bg:#18181a;--card:#1f1f22;--well:#232326;--text:#f2f2f3;--gray:#9d9da3;--gray-2:#8d8d93;--line:#ffffff14;--line-2:#ffffff24;--ring:#ffffff0f;--icon:brightness(0) invert(1) opacity(.7)}
+*,:before,:after{box-sizing:border-box}
+html,body{background:var(--bg);color:var(--text);font-family:var(--font-sans);letter-spacing:-.011em;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-feature-settings:"cv11","cv05","cv13";text-rendering:optimizelegibility;margin:0;padding:0;font-size:16px;line-height:1.625;transition:background .3s,color .3s}
+::selection{background:var(--text);color:var(--bg)}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--text);outline-offset:3px;border-radius:4px}
+h1,h2,h3,p,figure,ul,ol{margin:0}ul,ol{padding:0;list-style:none}
+h1,h2,h3{font-size:inherit;font-weight:500;line-height:inherit}
+img{display:block;max-width:100%}
+button{font:inherit;letter-spacing:inherit;color:inherit}
+.col{width:100%;max-width:calc(var(--col) + 48px);margin:0 auto;padding:0 24px}
+.section{margin-top:96px}
+.label{color:var(--text);justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:24px;font-weight:500;display:flex}
+.label .aside{color:var(--gray);margin-left:auto;font-size:14px;font-weight:400}
+@media(min-width:1200px){.section,.label{position:relative}h2.label,.label>h2{text-align:right;width:180px;color:var(--gray-2);margin:0;font-weight:400;display:block;position:absolute;top:0;right:calc(100% + 56px)}div.label{min-height:1px}div.label:not(:has(.aside)){margin-bottom:0}.label.wide{width:min(1040px,100vw - 32px);margin-left:calc(50% + min(1040px,100vw - 32px)/-2)}.label.wide>h2{text-align:left;width:auto;position:static}h2.label+*{margin-top:0}}
+.gray{color:var(--gray)}.gray-2{color:var(--gray-2)}.ink{color:var(--text)}
+.prose p{color:var(--gray);text-wrap:pretty}.prose p+p{margin-top:16px}.prose strong{color:var(--text);font-weight:500}
+.tnum{font-variant-numeric:tabular-nums}
+.link{color:var(--text);text-decoration:underline;text-decoration-color:var(--line-2);text-underline-offset:3px;transition:text-decoration-color .2s var(--ease-out);cursor:pointer;text-decoration-thickness:1px}
+button.link{background:0 0;border:0;padding:0}
+@media(hover:hover) and (pointer:fine){.link:hover{text-decoration-color:currentColor}}
+.row{transition:opacity .2s var(--ease-out);display:block}
+@media(hover:hover) and (pointer:fine){.list:hover .row{opacity:.45}.list:hover .row:hover{opacity:1}}
+.press{transition:transform .16s var(--ease-out),opacity .16s var(--ease-out)}.press:active{transform:scale(.97)}
+@keyframes pulse{50%{opacity:.5}}
+.dot{width:6px;height:6px;animation:pulse 2.4s var(--ease-in-out) infinite;background:#1fb469;border-radius:50%;flex-shrink:0;display:inline-block}
+@keyframes enter{0%{opacity:0;filter:blur(4px);transform:translateY(8px)}to{opacity:1;filter:none;transform:none}}
+.enter{opacity:0;animation:enter .7s var(--ease-out) forwards;animation-delay:calc(var(--i,0) * 70ms)}
+.js [data-reveal]{opacity:0;transition:opacity .7s var(--ease-out),transform .7s var(--ease-out);transition-delay:calc(var(--i,0) * 50ms);transform:translateY(10px)}
+.js [data-reveal].is-visible{opacity:1;transform:none}
+@media(max-width:640px){.section{margin-top:72px}}
+@media(prefers-reduced-motion:reduce){.enter,.js [data-reveal]{opacity:1;filter:none;transition:none;animation:none;transform:none}.dot{animation:none}}
+[data-tooltip]{position:relative}
+[data-tooltip]:after{content:attr(data-tooltip);position:absolute;bottom:calc(100% + 7px);left:50%;transform:translate(-50%) translateY(4px);background:var(--text);color:var(--bg);font-size:11px;font-weight:500;font-family:var(--font-sans);white-space:nowrap;padding:5px 12px;border-radius:100px;opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;z-index:10}
+@media(hover:hover) and (pointer:fine){[data-tooltip]:hover:after{opacity:1;transform:translate(-50%) translateY(0)}}
+
+/* intro */
+.intro{padding-top:clamp(64px,12vh,112px)}
+.who{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+.avatar{width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;cursor:pointer;filter:brightness(1.05) contrast(1.03)}
+@keyframes avatar-spin{0%{transform:rotate(0) scale(1)}50%{transform:rotate(180deg) scale(1.08)}to{transform:rotate(360deg) scale(1)}}
+.avatar-spin{animation:avatar-spin .7s cubic-bezier(.23,1,.32,1)}
+.who-text{line-height:1.4}
+.badge{margin-left:auto;font-size:13px;white-space:nowrap;flex-shrink:0;display:inline-flex;align-items:center;gap:7px;padding:4px 10px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--gray);cursor:pointer;transition:color .2s var(--ease-out),border-color .2s var(--ease-out)}
+@media(hover:hover) and (pointer:fine){.badge:hover{color:var(--text);border-color:var(--line-2)}}
+.bio .lead{color:var(--text)}
+@media(max-width:480px){.badge{padding:4px 8px}}
+
+/* work cards */
+.cards{position:relative;width:min(1040px,calc(100vw - 32px));margin-left:calc((100% - min(1040px,calc(100vw - 32px)))/2);display:grid;grid-template-columns:1fr 1fr;gap:36px 14px}
+.pcard{display:block;color:inherit;cursor:zoom-in}
+.board{--pad:clamp(18px,3.2vw,44px);position:relative;margin:0;aspect-ratio:4/3;border-radius:16px;background:var(--well);box-shadow:inset 0 0 0 1px var(--line);overflow:hidden}
+.board img{position:absolute;inset:var(--pad);margin:auto;width:auto;height:auto;max-width:calc(100% - 2 * var(--pad));max-height:calc(100% - 2 * var(--pad));border-radius:6px;user-select:none;-webkit-user-drag:none;box-shadow:0 0 0 1px var(--ring),0 2px 4px #0000000a,0 14px 34px -14px #00000038;opacity:0;transition:opacity .9s var(--ease-out),transform .6s var(--ease-out),box-shadow .6s var(--ease-out)}
+.board img.on{opacity:1}
+@media(hover:hover) and (pointer:fine){.pcard:hover .board img{transform:translateY(-4px)}}
+.pcard:active .board img{transform:scale(.99)}
+.dots{position:absolute;left:50%;bottom:10px;translate:-50% 0;display:flex;gap:5px}
+.dots i{width:5px;height:5px;border-radius:50%;background:var(--text);opacity:.16;transition:opacity .4s var(--ease-out)}
+.dots i.on{opacity:.55}
+.cap{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:12px}
+.name{font-weight:500;color:var(--text)}
+.kind{font-size:14px;color:var(--gray);text-align:right}
+.line{margin-top:2px;font-size:14px;color:var(--gray);text-wrap:pretty}
+@media(max-width:640px){.cards{grid-template-columns:1fr;gap:28px}}
+
+
+.cards.more{width:100%;margin-left:0;gap:28px 14px}
+.cards.more .board{aspect-ratio:1/1;--pad:28px}
+.cards.more .board img{border-radius:14px;box-shadow:0 0 0 1px #ffffff14,0 20px 40px -18px #000000b3}
+.tint-green{background:radial-gradient(120% 90% at 50% 0%,#245c3e 0%,#0d2016 60%,#08130d 100%)!important;box-shadow:none!important}
+.tint-ink{background:radial-gradient(120% 90% at 50% 0%,#46464c 0%,#1b1b1e 60%,#111113 100%)!important;box-shadow:none!important}
+.cards.more .dots i{background:#fff}
+.open-pill{position:absolute;top:12px;right:12px;z-index:2;font-size:12px;font-weight:500;color:#fff;background:#ffffff1f;border:1px solid #ffffff26;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:4px 10px;border-radius:999px;opacity:0;transform:translateY(-4px);transition:opacity .25s var(--ease-out),transform .25s var(--ease-out)}
+.pcard.ext{cursor:pointer}
+.pcard.ext:hover .open-pill,.pcard.ext:focus-visible .open-pill{opacity:1;transform:none}
+@media(hover:none){.open-pill{opacity:1;transform:none}}
+
+.flag{display:inline-block;width:18px;height:18px;vertical-align:-3px;margin-left:2px}
+/* lists */
+.services{display:grid;grid-template-columns:1fr 1fr;gap:4px 24px}
+.small-note{margin-top:16px;font-size:14px}
+.idx{border-top:1px solid var(--line)}
+.idx>li{border-bottom:1px solid var(--line)}
+.idx-row{display:flex;align-items:center;gap:14px;padding:11px 0;font-size:15px}
+ol.idx .idx-row{padding-bottom:2px}
+.idx-desc{font-size:14px;line-height:1.55;padding-bottom:12px;max-width:56ch}
+.fill{flex:1;min-width:12px}
+.meta{flex-shrink:0;font-size:14px;display:inline-flex;align-items:center;gap:8px}
+.now{width:5px;height:5px}
+.wrap-t{min-width:0;line-height:1.45;text-wrap:pretty;display:flex;flex-direction:column;gap:3px}
+.doi{font-family:var(--font-mono);font-size:12px;letter-spacing:0;user-select:all}
+@media(max-width:560px){.list .meta{display:none}}
+.clip{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.doc{width:30px;height:36px;flex-shrink:0;display:grid;align-content:center;gap:3px;padding-left:6px;border-radius:6px;border:1px solid var(--line);background:var(--card);box-shadow:0 1px 2px #00000008}
+.doc i{display:block;height:2px;width:12px;border-radius:2px;background:var(--line-2)}
+.doc i:nth-child(2){width:16px}
+.lock{font-family:var(--font-mono);font-size:11px;letter-spacing:0;color:var(--gray-2);border:1px solid var(--line);border-radius:4px;padding:0 5px;margin-left:8px;vertical-align:1px}
+.stack{display:flex;flex-wrap:wrap;gap:6px}
+.stack li{width:40px;height:40px;display:grid;place-items:center;border-radius:10px;border:1px solid var(--line);background:var(--card)}
+.stack img{width:20px;height:20px;object-fit:contain;filter:grayscale(1) var(--icon);transition:filter .25s var(--ease-out)}
+.nudge{margin-bottom:24px}
+.lead-in{margin-bottom:24px}
+@media(max-width:560px){.services{grid-template-columns:1fr}}
+
+/* gallery */
+.folio{position:relative;left:50%;width:min(1040px,calc(100vw - 32px));transform:translate(-50%);display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.mount{--pad:clamp(18px,3.2vw,44px);position:relative;margin:0;border-radius:16px;background:var(--well);box-shadow:inset 0 0 0 1px var(--line);overflow:hidden;aspect-ratio:4/3}
+.mount img{position:absolute;inset:var(--pad);margin:auto;width:auto;height:auto;max-width:calc(100% - 2 * var(--pad));max-height:calc(100% - 2 * var(--pad));border-radius:6px;cursor:zoom-in;user-select:none;-webkit-user-drag:none;box-shadow:0 0 0 1px var(--ring),0 2px 4px #0000000a,0 14px 34px -14px #00000038;transition:transform .6s var(--ease-out),box-shadow .6s var(--ease-out)}
+.mount:hover img{transform:translateY(-4px);box-shadow:0 0 0 1px var(--ring),0 4px 8px #0000000a,0 24px 48px -16px #00000047}
+.folio .mount:last-child:nth-child(2n+1){grid-column:1/-1;aspect-ratio:16/7}
+
+@media(max-width:640px){.folio{grid-template-columns:1fr;gap:10px}}
+
+/* bubble wrap */
+.bubbles{display:grid;grid-template-columns:repeat(12,1fr);gap:6px;padding:18px;border:1px solid var(--line);border-radius:18px;background:var(--card);user-select:none;touch-action:manipulation}
+.bub{aspect-ratio:1;border-radius:50%;border:none;padding:0;cursor:pointer;background:radial-gradient(circle at 35% 30%,#fff 0 18%,#e9e9e7 45%,#d8d8d5 100%);box-shadow:inset 0 -2px 4px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.08);transition:transform .12s}
+:root[data-theme=dark] .bub{background:radial-gradient(circle at 35% 30%,#5a5a60 0 18%,#3a3a3f 45%,#2a2a2e 100%)}
+.bub:hover{transform:scale(1.06)}
+.bub.pop{background:var(--well);box-shadow:inset 0 2px 4px rgba(0,0,0,.12);transform:scale(.86);cursor:default}
+.bubmeta{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:12px;letter-spacing:0;color:var(--gray-2);margin-top:10px}
+.bubmeta button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line-2)}
+.bubmeta button:hover{color:var(--text)}
+
+/* footer */
+.foot{margin-top:120px;padding:28px 0 56px;border-top:1px solid var(--line)}
+.sign{font-weight:500;margin-bottom:4px}
+.foot-links{display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px;margin-top:28px;font-size:15px}
+.foot-links a,.foot-links button{color:var(--gray);font:inherit;background:none;border:0;padding:0;cursor:pointer;transition:color .2s var(--ease-out)}
+.foot-links a:hover,.foot-links button:hover{color:var(--text)}
+.sep{width:1px;height:14px;background:var(--line-2)}
+.foot-base{display:flex;flex-wrap:wrap;gap:6px 20px;margin-top:28px;font-size:13px}
+kbd{font-family:var(--font-mono);font-size:11px;padding:0 5px;border:1px solid var(--line-2);border-radius:4px;color:var(--gray)}
+@media(max-width:640px){.hint{display:none}}
+
+/* lightbox */
+#lb{position:fixed;inset:0;z-index:200;display:grid;grid-template-columns:64px 1fr 64px;grid-template-rows:auto 1fr;align-items:center;justify-items:center;padding:0 12px 32px;background:var(--bg);opacity:0;pointer-events:none;transition:opacity .24s var(--ease-out)}
+#lb.lb-open{opacity:1;pointer-events:auto}
+.lb-bar{grid-column:1/-1;justify-self:stretch;display:flex;gap:16px;align-items:center;height:56px;padding:0 12px;font-size:15px}
+.lb-count{margin-left:auto;color:var(--gray)}
+#lb-close{font-size:14px;height:32px;padding:0 14px;border-radius:999px;border:1px solid var(--line-2);background:var(--card);color:var(--text);cursor:pointer;transition:border-color .2s var(--ease-out)}
+@media(hover:hover) and (pointer:fine){#lb-close:hover{border-color:var(--text)}}
+#lb img{grid-column:2;max-width:100%;max-height:calc(100svh - 110px);width:auto;height:auto;object-fit:contain;border-radius:12px;border:1px solid var(--line);box-shadow:0 24px 60px -30px #00000040;transform:scale(.98);transition:transform .4s var(--ease-out)}
+#lb.lb-open img{transform:none}
+.lb-nav{width:40px;height:40px;border-radius:50%;border:1px solid var(--line-2);background:var(--card);color:var(--text);font-size:15px;cursor:pointer}
+@media(max-width:720px){#lb{grid-template-columns:1fr 1fr;grid-template-rows:auto 1fr auto}#lb img{grid-column:1/-1;grid-row:2}#lb-prev{grid-row:3;justify-self:end;margin-right:8px}#lb-next{grid-row:3;justify-self:start;margin-left:8px}}
+
+#email-toast{position:fixed;left:50%;bottom:28px;z-index:210;padding:8px 14px;border-radius:999px;background:var(--text);color:var(--bg);font-size:13px;font-weight:500;transform:translate(-50%,10px);opacity:0;pointer-events:none;transition:opacity .24s var(--ease-out),transform .24s var(--ease-out);white-space:nowrap}
+#email-toast.is-on{opacity:1;transform:translate(-50%)}
+
+.theme-toggle{position:fixed;top:20px;right:24px;z-index:90;display:grid;place-items:center;width:36px;height:36px;padding:0;border:0;border-radius:50%;color:var(--gray);background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 0 0 1px var(--line);cursor:pointer;transition:color .2s var(--ease-out)}
+.theme-toggle:hover{color:var(--text)}
+.theme-toggle svg{width:16px;height:16px;transition:transform .7s cubic-bezier(.45,0,.55,1)}
+:root[data-theme=dark] .theme-toggle svg{transform:rotate(180deg)}
+@media(max-width:560px){.theme-toggle{top:14px;right:14px}}
+
+/* konami */
+#konami-overlay{position:fixed;inset:0;z-index:9998;display:flex;align-items:center;justify-content:center;padding:2rem;background:#080808f7;backdrop-filter:blur(12px);opacity:0;pointer-events:none;transition:opacity .45s cubic-bezier(.23,1,.32,1)}
+#konami-overlay.is-open{opacity:1;pointer-events:all}
+#konami-inner{text-align:center;max-width:520px;width:100%;transform:translateY(16px);transition:transform .45s cubic-bezier(.23,1,.32,1)}
+#konami-overlay.is-open #konami-inner{transform:none}
+.konami-label{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#4a4a50;margin:0 0 2.5rem}
+.konami-name{font-size:clamp(52px,10vw,88px);font-weight:500;letter-spacing:-.04em;line-height:1;color:#fff;margin-bottom:.5rem}
+.konami-role{font-size:14px;color:#1fb469;margin:0 0 1.25rem;font-family:var(--font-mono);letter-spacing:.02em}
+.konami-copy{font-size:14px;line-height:1.7;color:#7a7a80;margin:0 0 2.5rem}
+.konami-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:2.5rem}
+.konami-btn-primary{background:#fff;color:#0a0a0a;padding:9px 22px;border-radius:100px;font-size:13px;font-weight:500;border:0;cursor:pointer}
+.konami-btn-ghost{border:1px solid rgba(255,255,255,.12);color:#9a9aa0;padding:9px 22px;border-radius:100px;font-size:13px;font-weight:500;background:none}
+#konami-close{background:none;border:none;color:#4a4a50;font-size:11.5px;font-family:var(--font-mono);cursor:pointer}
+#konami-close kbd{background:#ffffff0f;border-color:rgba(255,255,255,.1);color:#7a7a80}
+
+/* diary */
+.diary-fab{position:fixed;right:24px;bottom:24px;z-index:90;width:54px;height:54px;display:flex;align-items:center;justify-content:center;padding:0;border:none;border-radius:14px;background:#207bb3;color:#fff;cursor:pointer;box-shadow:0 10px 24px -10px #207bb3aa,inset 0 0 0 1px #ffffff26;transition:transform .22s var(--ease-out),opacity .26s var(--ease-out)}
+.diary-fab:hover{transform:translateY(-2px) scale(1.05) rotate(-3deg)}
+.diary-fab svg{width:26px;height:26px}
+#diary-overlay{position:fixed;inset:0;z-index:300;opacity:0;pointer-events:none;transition:opacity .32s var(--ease-out);display:flex;align-items:center;justify-content:center;padding:20px}
+#diary-overlay.is-open{opacity:1;pointer-events:auto}
+#diary-overlay.is-open~.diary-fab{opacity:0;pointer-events:none}
+.diary-backdrop{position:absolute;inset:0;background:#207bb380;backdrop-filter:blur(4px) saturate(1.1);cursor:zoom-out}
+.diary-close{position:fixed;top:20px;right:24px;z-index:2;width:40px;height:40px;display:grid;place-items:center;color:#fff;background:#ffffff24;border:none;border-radius:999px;cursor:pointer;font-size:18px}
+.diary-book{position:relative;z-index:1;display:flex;gap:2px;padding:12px;background:#ebebeb;border-radius:12px;width:min(1014px,100%);min-height:min(600px,80vh);box-shadow:0 74px 45px #0000000d,0 33px 33px #00000017,0 8px 18px #0000001a;transform:scale(.95) translateY(8px);transition:transform .46s var(--ease-out)}
+#diary-overlay.is-open .diary-book{transform:none}
+.diary-page{position:relative;flex:1;background:#fff;overflow:hidden;padding:30px 44px 26px;font-family:var(--font-hand);color:#1a1a1a;background-image:linear-gradient(rgba(45,70,110,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(45,70,110,.055) 1px,transparent 1px);background-size:14px 14px}
+.dp-title{margin:0 0 20px;font-weight:500;font-size:33px;line-height:1;color:#161616}
+.dp-note{margin:0 0 15px;font-size:21px;line-height:1.28}
+.dp-list li{margin:0 0 16px;font-size:22px;line-height:1.3;padding-left:20px;position:relative}
+.dp-list li:before{content:"✷";position:absolute;left:0;color:#207bb3;font-size:16px;top:2px}
+.dp-sign{margin:26px 0 0;font-size:26px;text-align:right}
+.polaroid{position:absolute;width:180px;padding:8px;background:#fff;border-radius:2px;box-shadow:0 23px 23px #00000017,0 6px 13px #0000001a;transform:rotate(6deg);right:40px;bottom:40px;margin:0}
+.polaroid img{aspect-ratio:1/.95;object-fit:cover;width:100%}
+.polaroid figcaption{padding:8px 2px 2px;text-align:center;font-family:var(--font-hand);font-size:21px;line-height:1}
+@media(max-width:767px){.diary-book{flex-direction:column;max-height:86vh;overflow:auto}.diary-page{padding:26px 24px}.polaroid{position:relative;right:auto;bottom:auto;margin:18px auto 0;transform:rotate(-3deg)}}
+</style>
+<script>
+try{if(localStorage.getItem('theme')==='dark')document.documentElement.dataset.theme='dark'}catch(e){}
+document.documentElement.classList.add('js');
+</script>
+</head>
+<body>
+<main class="col">
+
+<header class="intro">
+  <div class="who enter" style="--i:0">
+    <img src="img/avatar.webp" alt="Mércia Jaynne" width="44" height="44" class="avatar" id="avatar">
+    <div class="who-text">
+      <h1>Mércia Jaynne</h1>
+      <p class="gray">Profissional de Educação Física · <span data-tooltip="Disponível em todo o Brasil 🌎">Natal <img src="img/flag-br.png" alt="Brasil" class="flag"></span></p>
+    </div>
+    <button type="button" class="badge press" data-copy-email><span class="dot"></span>Aberta a projetos</button>
+  </div>
+  <div class="prose bio">
+    <p class="lead enter" style="--i:1">Oi, eu sou a Mércia. Trabalho com treino, pesquisa e tecnologia, e gosto de pegar o que aprendo na ciência do exercício e transformar em coisas úteis: apps, planilhas que funcionam, automações e um pouco de design.</p>
+    <p class="enter" style="--i:2">Me formei em Educação Física na UFRN, faço uma segunda graduação em Nutrição e em 2027 começo o mestrado no PPGEF. No meio disso tudo, sempre tem algum projetinho aberto no computador que talvez vire algo maior.</p>
+    <p class="enter" style="--i:3">Se quiser, dá uma olhada no meu <a href="https://github.com/sugasbrain" target="_blank" rel="noopener noreferrer" class="link">GitHub</a>, me segue no <a href="https://instagram.com/mercia.studies" target="_blank" rel="noopener noreferrer" class="link">Instagram</a> ou <button type="button" class="link" data-copy-email>copia meu e-mail</button> e me chama.</p>
+  </div>
+</header>
+
+<section class="section" aria-labelledby="trabalhos">
+  <div class="label wide" data-reveal>
+    <h2 id="trabalhos">Trabalhos</h2>
+    <a href="#design" class="aside press">Mais projetos ↓</a>
+  </div>
+  <div class="cards">
+    <a href="#" class="pcard" data-reveal style="--i:0" data-set="mj">
+      <figure class="board" data-cycle>
+        <img src="img/mj-logos.webp" alt="Identidade visual Mércia Jaynne" class="on"><img src="img/mj-construcao.webp" alt=""><img src="img/mj-pattern.webp" alt=""><img src="img/mj-poster.webp" alt="">
+        <span class="dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span>
+      </figure>
+      <div class="cap"><span class="name">Mércia Personal Trainer</span><span class="kind">Identidade visual</span></div>
+      <p class="line">A marca que criei pra mim: o M e o J viraram um halter.</p>
+    </a>
+    <a href="#" class="pcard" data-reveal style="--i:1" data-set="psqi">
+      <figure class="board" data-cycle>
+        <img src="img/psqi-1.webp" alt="PSQI automatizado" class="on"><img src="img/psqi-2.webp" alt="">
+        <span class="dots" aria-hidden="true"><i class="on"></i><i></i></span>
+      </figure>
+      <div class="cap"><span class="name">PSQI automatizado</span><span class="kind">Ferramenta web</span></div>
+      <p class="line">O questionário de sono de Pittsburgh, só que já calculando tudo sozinho.</p>
+    </a>
+    <a href="#" class="pcard" data-reveal style="--i:2" data-set="vf">
+      <figure class="board" data-cycle>
+        <img src="img/vf-01.webp" alt="Voz Febril" class="on"><img src="img/vf-03.webp" alt=""><img src="img/vf-04.webp" alt=""><img src="img/vf-06.webp" alt="">
+        <span class="dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span>
+      </figure>
+      <div class="cap"><span class="name">Voz Febril</span><span class="kind">Marca</span></div>
+      <p class="line">Criei a identidade e o primeiro carrossel de um perfil de notícias.</p>
+    </a>
+    <a href="#" class="pcard" data-reveal style="--i:3" data-set="cc">
+      <figure class="board" data-cycle>
+        <img src="img/cc-01.webp" alt="Carga Científica" class="on"><img src="img/cc-02.webp" alt=""><img src="img/cc-03.webp" alt=""><img src="img/cc-04.webp" alt="">
+        <span class="dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span>
+      </figure>
+      <div class="cap"><span class="name">Carga Científica</span><span class="kind">Social media</span></div>
+      <p class="line">Posts de estreia de um grupo de estudos feito por alunos, pra alunos.</p>
+    </a>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="codigo">
+  <div class="label" data-reveal>
+    <h2 id="codigo">Código</h2>
+    <a href="https://github.com/sugasbrain" target="_blank" rel="noopener noreferrer" class="aside press">GitHub ↗</a>
+  </div>
+  <ol class="idx">
+    <li data-reveal style="--i:0"><div class="idx-row"><span class="ink">CoreIA <span class="gray">· Tutor com IA</span><span class="lock">privado</span></span><span class="fill"></span><span class="gray-2 meta"><span class="dot now"></span>React · Supabase</span></div><p class="gray idx-desc">Um tutor com IA pros alunos do bacharelado em Educação Física da UFRN, que responde dúvidas sobre o curso. A ideia é que ele chegue no WhatsApp.</p></li>
+    <li data-reveal style="--i:1"><div class="idx-row"><span class="ink">Poti Training <span class="gray">· App de treino</span><span class="lock">privado</span></span><span class="fill"></span><span class="gray-2 meta"><span class="dot now"></span>Firebase · Chart.js</span></div><p class="gray idx-desc">O app que estou fazendo pros meus alunos: anamnese, montagem de treino, acompanhamento e relatórios num lugar só. Vai sair pra Android e iOS.</p></li>
+    <li data-reveal style="--i:2"><div class="idx-row"><span class="ink">Leitor de acelerômetros <span class="gray">· Pesquisa</span><span class="lock">privado</span></span><span class="fill"></span><span class="gray-2 meta">Python</span></div><p class="gray idx-desc">Um script que lê os dados brutos dos acelerômetros que usamos nas pesquisas e já entrega tudo organizado pra análise. Poupa horas de planilha.</p></li>
+    <li data-reveal style="--i:3"><div class="idx-row"><span class="ink">DoeONGs <span class="gray">· Hackathon do Sol</span><span class="lock">privado</span></span><span class="fill"></span><span class="gray-2 meta">Django · Docker</span></div><p class="gray idx-desc">As ONGs do RN dizem do que precisam e quem quer ajudar doa exatamente aquilo, com comprovante e tudo transparente.</p></li>
+    <li data-reveal style="--i:4"><div class="idx-row"><span class="ink"><a class="link" href="https://github.com/sugasbrain/psqi-sono" target="_blank" rel="noopener noreferrer">PSQI automatizado</a> <span class="gray">· Ferramenta web</span></span><span class="fill"></span><span class="gray-2 meta">HTML · JS</span></div><p class="gray idx-desc">Fiz pra usar nas avaliações de sono do grupo REST. Você preenche a anamnese e o questionário, e a pontuação sai pronta.</p></li>
+    <li data-reveal style="--i:5"><div class="idx-row"><span class="ink"><a class="link" href="https://github.com/sugasbrain/whatsapp-minimal-light-dark" target="_blank" rel="noopener noreferrer">WhatsApp Minimal</a> <span class="gray">· Open source</span></span><span class="fill"></span><span class="gray-2 meta">CSS</span></div><p class="gray idx-desc">Um tema pro WhatsApp Web com cara de iPhone, mais limpo e com modo claro e escuro. Fiz porque achava o original feio.</p></li>
+  </ol>
+</section>
+
+<section class="section" aria-labelledby="servicos">
+  <h2 id="servicos" class="label" data-reveal>O que eu faço</h2>
+  <ul class="services" data-reveal>
+    <li>Avaliação física</li><li>Sites e landing pages</li><li>Web apps e apps mobile</li><li>Automações</li><li>Análise de dados e estatística em R</li><li>Identidade visual e social media</li>
+  </ul>
+  <p class="gray small-note" data-reveal>Dá pra gente trabalhar junto num projeto, numa pesquisa ou no acompanhamento de alunos.</p>
+</section>
+
+<section class="section" aria-labelledby="trajetoria">
+  <div class="label" data-reveal><h2 id="trajetoria">Trajetória</h2></div>
+  <ol class="idx">
+    <li data-reveal style="--i:0"><div class="idx-row"><span class="ink">Mestrado em Educação Física <span class="gray">· PPGEF/UFRN</span></span><span class="fill"></span><span class="gray-2 tnum meta">início em 2027</span></div><p class="gray idx-desc">Vou estudar como exercício, sono e treino conversam entre si.</p></li>
+    <li data-reveal style="--i:1"><div class="idx-row"><span class="ink">Graduação em Nutrição <span class="gray">· UFRN</span></span><span class="fill"></span><span class="gray-2 tnum meta"><span class="dot now"></span>em curso</span></div><p class="gray idx-desc">Minha segunda graduação. Treino sem comida certa fica pela metade.</p></li>
+    <li data-reveal style="--i:2"><div class="idx-row"><span class="ink">Pesquisadora <span class="gray">· Grupo REST</span></span><span class="fill"></span><span class="gray-2 tnum meta">UFRN</span></div><p class="gray idx-desc">Research in Rest, Sleep &amp; Training.</p></li>
+    <li data-reveal style="--i:3"><div class="idx-row"><span class="ink">Profissional de Educação Física <span class="gray">· CAURN Ativa</span></span><span class="fill"></span><span class="gray-2 tnum meta">2026</span></div><p class="gray idx-desc">Faço as avaliações físicas do Programa CAURN Ativa.</p></li>
+    <li data-reveal style="--i:4"><div class="idx-row"><span class="ink">Bacharelado em Educação Física <span class="gray">· UFRN</span></span><span class="fill"></span><span class="gray-2 tnum meta">2026.1</span></div><p class="gray idx-desc">No TCC testei se estimular o córtex pré-frontal com tDCS muda a forma como o cérebro responde ao exercício.</p></li>
+  </ol>
+</section>
+
+<section class="section" aria-labelledby="pesquisa">
+  <div class="label" data-reveal><h2 id="pesquisa">Pesquisa</h2><span class="aside">Artigos publicados</span></div>
+  <ul class="idx list">
+    <li data-reveal style="--i:0"><a href="https://www.researchgate.net/publication/415631408_More_is_not_necessarily_better_A_comparison_of_2-mA_and_4-mA_prefrontal_cortex_anodal_tDCS_on_endurance_performance_head_oxygenation_cognition_and_psychophysiological_responses_in_cyclists" target="_blank" rel="noopener noreferrer" class="row idx-row"><span class="doc"><i></i><i></i><i></i></span><span class="wrap-t"><span class="ink">More is not necessarily better: A comparison of 2-mA and 4-mA prefrontal cortex anodal tDCS on endurance performance, head oxygenation, cognition, and psychophysiological responses in cyclists</span><span class="doi gray-2">DOI 10.1016/j.neuroscience.2026.10.019</span></span><span class="fill"></span><span class="gray-2 meta">Neuroscience · 2026 ↗</span></a></li>
+    <li data-reveal style="--i:1"><a href="https://www.researchgate.net/publication/397058400_Effect_of_tDCS_targeting_the_dorsolateral_prefrontal_cortex_on_psychophysiological_responses_and_brain_oxygenation_during_exercise_in_healthy_adults_a_proof-of-concept_randomized_controlled_trial" target="_blank" rel="noopener noreferrer" class="row idx-row"><span class="doc"><i></i><i></i><i></i></span><span class="wrap-t"><span class="ink">Effect of tDCS targeting the dorsolateral prefrontal cortex on psychophysiological responses and brain oxygenation during exercise in healthy adults: a proof-of-concept randomized controlled trial</span><span class="doi gray-2">DOI 10.3389/fphys.2025.1703766</span></span><span class="fill"></span><span class="gray-2 meta">Frontiers in Physiology · 2025 ↗</span></a></li>
+    <li data-reveal style="--i:2"><a href="https://www.researchgate.net/publication/395708075_The_Placebo_Effect_of_tDCS_on_Motor_Performance_A_Call_for_Domain-Specific_Methodological_Considerations" target="_blank" rel="noopener noreferrer" class="row idx-row"><span class="doc"><i></i><i></i><i></i></span><span class="wrap-t"><span class="ink">The Placebo Effect of tDCS on Motor Performance: A Call for Domain-Specific Methodological Considerations</span><span class="doi gray-2">DOI 10.1016/j.neucli.2025.103108</span></span><span class="fill"></span><span class="gray-2 meta">Neurophysiologie Clinique · 2025 ↗</span></a></li>
+  </ul>
+</section>
+
+<section class="section prose" aria-labelledby="juntos" data-reveal>
+  <h2 id="juntos" class="label">Trabalhando juntos</h2>
+  <p class="ink">Evidência antes de achismo, sempre.</p>
+  <p>Se você precisa de uma ferramenta pra resolver alguma coisa chata do seu dia ou de alguém pra somar numa pesquisa, <button type="button" class="link" data-copy-email>me chama</button>. Vou adorar conversar.</p>
+</section>
+
+<section class="section" aria-labelledby="stack">
+  <h2 id="stack" class="label" data-reveal>Stack</h2>
+  <ul class="stack" data-reveal>
+    <li data-tooltip="Python"><img src="icons/python.svg" alt="Python"></li>
+    <li data-tooltip="R"><img src="icons/r.svg" alt="R"></li>
+    <li data-tooltip="JavaScript"><img src="icons/javascript.svg" alt="JavaScript"></li>
+    <li data-tooltip="TypeScript"><img src="icons/typescript.svg" alt="TypeScript"></li>
+    <li data-tooltip="React"><img src="icons/react.svg" alt="React"></li>
+    <li data-tooltip="Django"><img src="icons/django.svg" alt="Django"></li>
+    <li data-tooltip="FastAPI"><img src="icons/fastapi.svg" alt="FastAPI"></li>
+    <li data-tooltip="PostgreSQL"><img src="icons/postgresql.svg" alt="PostgreSQL"></li>
+    <li data-tooltip="Firebase"><img src="icons/firebase.svg" alt="Firebase"></li>
+    <li data-tooltip="Supabase"><img src="icons/supabase.svg" alt="Supabase"></li>
+    <li data-tooltip="Docker"><img src="icons/docker.svg" alt="Docker"></li>
+    <li data-tooltip="Vercel"><img src="icons/vercel.svg" alt="Vercel"></li>
+    <li data-tooltip="Git"><img src="icons/git.svg" alt="Git"></li>
+    <li data-tooltip="Figma"><img src="icons/figma.svg" alt="Figma"></li>
+  </ul>
+</section>
+
+<section class="section" aria-label="Mais projetos" id="design">
+  <p class="gray nudge" data-reveal>Ainda por aqui? Então olha mais umas coisas que eu fiz ↓</p>
+  <div class="cards more">
+    <a href="https://merciaseformou.lovable.app" target="_blank" rel="noopener noreferrer" class="pcard ext" data-reveal style="--i:0">
+      <figure class="board tint-green" data-cycle>
+        <img src="img/formatura-1.webp" alt="Convite da colação de grau" class="on"><img src="img/formatura-2.webp" alt="">
+        <span class="open-pill">Abrir site ↗</span>
+        <span class="dots" aria-hidden="true"><i class="on"></i><i></i></span>
+      </figure>
+      <div class="cap"><span class="name">Minha formatura</span><span class="kind">Convite digital</span></div>
+      <p class="line">O convite da minha colação de grau, com foto, detalhes da cerimônia, como chegar e confirmação de presença.</p>
+    </a>
+    <a href="https://ackmkook.tumblr.com/" target="_blank" rel="noopener noreferrer" class="pcard ext" data-reveal style="--i:1">
+      <figure class="board tint-ink">
+        <img src="img/tumblr.webp" alt="Tema de Tumblr em formato de celular" class="on">
+        <span class="open-pill">Abrir site ↗</span>
+      </figure>
+      <div class="cap"><span class="name">Tema de Tumblr</span><span class="kind">Web design</span></div>
+      <p class="line">Um tema que transforma o perfil do Tumblr numa tela de celular, com música tocando, caixinha de perguntas e "sobre mim".</p>
+    </a>
+  </div>
+</section>
+
+<section class="section" aria-label="Plástico-bolha">
+  <p class="gray lead-in" data-reveal>Chegou até o fim? Toma, um plástico-bolha pra você estourar ↓</p>
+  <div class="bubbles" id="bw" data-reveal></div>
+  <div class="bubmeta"><span id="bw-count">0 estourados</span><button type="button" id="bw-reset">recomeçar</button></div>
+</section>
+
+<footer class="foot" data-reveal>
+  <p class="sign">Obrigada por passar aqui.</p>
+  <p class="gray">Se curtiu alguma coisa, <button type="button" class="link" data-copy-email>me manda um e-mail</button>. Respondo sempre.</p>
+  <nav class="foot-links" aria-label="Rodapé">
+    <a href="#" class="press">Início</a>
+    <a href="#trabalhos" class="press">Trabalhos</a>
+    <a href="#codigo" class="press">Código</a>
+    <a href="#pesquisa" class="press">Pesquisa</a>
+    <button type="button" class="press" data-diary-open>Caderno</button>
+    <span class="sep" aria-hidden="true"></span>
+    <a href="https://github.com/sugasbrain" target="_blank" rel="noopener noreferrer" class="press">GitHub</a>
+    <a href="https://www.researchgate.net/profile/Mjl-De-Melo" target="_blank" rel="noopener noreferrer" class="press">ResearchGate</a>
+    <a href="http://lattes.cnpq.br/1108331976162293" target="_blank" rel="noopener noreferrer" class="press">Lattes</a>
+    <a href="https://instagram.com/mercia.studies" target="_blank" rel="noopener noreferrer" class="press">Instagram</a>
+    <button type="button" class="press" data-copy-email>E-mail</button>
+  </nav>
+  <div class="foot-base gray-2">
+    <span>© 2026 Mércia Jaynne</span>
+    
+    <span class="hint">Aperte <kbd>C</kbd> para copiar o e-mail</span>
+  </div>
+</footer>
+</main>
+
+<div id="lb" role="dialog" aria-modal="true" aria-label="Imagem ampliada">
+  <div class="lb-bar"><span id="lb-title"></span><span class="lb-count tnum" id="lb-count"></span><button type="button" id="lb-close">Fechar</button></div>
+  <button type="button" class="lb-nav" id="lb-prev" aria-label="Anterior">←</button>
+  <img id="lb-img" alt="">
+  <button type="button" class="lb-nav" id="lb-next" aria-label="Próxima">→</button>
+</div>
+<div id="email-toast">E-mail copiado</div>
+
+<div id="konami-overlay" aria-hidden="true"><div id="konami-inner">
+  <p class="konami-label">↑ ↑ ↓ ↓ ← → ← → B A</p>
+  <p class="konami-name">Mércia</p>
+  <p class="konami-role">educação física · pesquisa · dev</p>
+  <p class="konami-copy">Você achou o segredo! Quem chega até aqui não pula treino. Bora fazer alguma coisa juntos?</p>
+  <div class="konami-actions"><button type="button" class="konami-btn-primary" data-copy-email>Copiar e-mail</button><a class="konami-btn-ghost" href="https://github.com/sugasbrain" target="_blank" rel="noopener noreferrer">GitHub</a></div>
+  <button type="button" id="konami-close">aperte <kbd>ESC</kbd> ou clique fora para fechar</button>
+</div></div>
+
+<div id="diary-overlay" aria-hidden="true">
+  <div class="diary-backdrop" data-diary-close></div>
+  <button type="button" class="diary-close" data-diary-close aria-label="Fechar">×</button>
+  <div class="diary-book">
+    <div class="diary-page">
+      <h3 class="dp-title">Coisas em que acredito</h3>
+      <p class="dp-note">Evidência antes de achismo.</p>
+      <p class="dp-note">O treino tem que caber na pessoa, e não o contrário.</p>
+      <p class="dp-note">Ferramenta boa é a que alguém usa de verdade.</p>
+      <p class="dp-sign">Mércia ✦</p>
+    </div>
+    <div class="diary-page">
+      <h3 class="dp-title">Agora mesmo</h3>
+      <ul class="dp-list">
+        <li>nutrição e mestrado chegando em 2027</li>
+        <li>construindo o Poti Training</li>
+        <li>CoreIA tomando forma</li>
+        <li>Luna e Simon, meus dois gatos, por perto</li>
+      </ul>
+      <figure class="polaroid"><img src="img/foto.webp" alt="Mércia Jaynne"><figcaption>versão 2026 ✦</figcaption></figure>
+    </div>
+  </div>
+</div>
+<button type="button" class="diary-fab" data-diary-open aria-label="Abrir caderno"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v16H6.5A1.5 1.5 0 0 0 5 20.5v-16Z"/><path d="M5 20.5A1.5 1.5 0 0 0 6.5 22H19v-3"/><path d="M9 7h6M9 10.5h4"/></svg></button>
+
+<button type="button" class="theme-toggle press" id="theme" aria-label="Alternar tema"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18Z" fill="currentColor"/></svg></button>
+
+<script>
+(function(){
+const EMAIL='merciajaynnee@gmail.com';const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px'});
+$$('[data-reveal]').forEach(el=>io.observe(el));
+
+const toast=$('#email-toast');let tt;
+function flash(m){toast.textContent=m;toast.classList.add('is-on');clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove('is-on'),1800)}
+async function copy(){try{await navigator.clipboard.writeText(EMAIL);flash('E-mail copiado')}catch(e){flash(EMAIL)}}
+$$('[data-copy-email]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();copy()}));
+
+const av=$('#avatar');av.addEventListener('click',()=>{av.classList.remove('avatar-spin');void av.offsetWidth;av.classList.add('avatar-spin')});
+
+const fmt=new Intl.DateTimeFormat('pt-BR',{timeZone:'America/Fortaleza',hour:'2-digit',minute:'2-digit',hour12:false});
+const tick=()=>$$('[data-clock]').forEach(e=>e.textContent=fmt.format(new Date()));tick();setInterval(tick,15000);
+
+$('#theme').addEventListener('click',()=>{const d=document.documentElement;const dark=d.dataset.theme!=='dark';if(dark)d.dataset.theme='dark';else delete d.dataset.theme;try{localStorage.setItem('theme',dark?'dark':'light')}catch(e){}});
+
+$$('[data-cycle]').forEach(b=>{const imgs=[...b.querySelectorAll('img')],dots=[...b.querySelectorAll('.dots i')];let i=0,t=null;
+  const go=()=>{imgs[i].classList.remove('on');dots[i]&&dots[i].classList.remove('on');i=(i+1)%imgs.length;imgs[i].classList.add('on');dots[i]&&dots[i].classList.add('on')};
+  new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){if(!t)t=setInterval(go,2600+Math.random()*600)}else{clearInterval(t);t=null}}),{threshold:.3}).observe(b)});
+
+const SETS={
+ mj:{t:'Mércia Personal Trainer · Identidade visual',i:['mj-logos','mj-construcao','mj-pattern','mj-poster']},
+ psqi:{t:'PSQI automatizado',i:['psqi-1','psqi-2']},
+ vf:{t:'Voz Febril · Marca',i:['vf-01','vf-03','vf-04','vf-05','vf-06','vf-07','vf-08']},
+ cc:{t:'Carga Científica · Carrossel',i:['cc-01','cc-02','cc-03','cc-04']}};
+const folio=$$('.folio img').map(im=>({src:im.getAttribute('src'),t:im.alt}));
+const lb=$('#lb'),li=$('#lb-img');let list=[],idx=0;
+function render(){const it=list[idx];li.src=it.src;li.alt=it.t;$('#lb-title').textContent=it.t;$('#lb-count').textContent=(idx+1)+' / '+list.length}
+function open(l,i){list=l;idx=i;render();lb.classList.add('lb-open');document.body.style.overflow='hidden'}
+function close(){lb.classList.remove('lb-open');document.body.style.overflow=''}
+function step(d){idx=(idx+d+list.length)%list.length;render()}
+$$('.pcard[data-set]').forEach(c=>c.addEventListener('click',e=>{e.preventDefault();const s=SETS[c.dataset.set];const on=[...c.querySelectorAll('img')].findIndex(x=>x.classList.contains('on'));open(s.i.map(n=>({src:'img/'+n+'.webp',t:s.t})),Math.max(0,on))}));
+$$('.folio img').forEach((im,i)=>{im.tabIndex=0;im.setAttribute('role','button');const go=()=>open(folio,i);im.addEventListener('click',go);im.addEventListener('keydown',e=>{if(e.key==='Enter')go()})});
+$('#lb-close').onclick=close;$('#lb-prev').onclick=()=>step(-1);$('#lb-next').onclick=()=>step(1);
+lb.addEventListener('click',e=>{if(e.target===lb)close()});
+let sx=null;lb.addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});lb.addEventListener('touchend',e=>{if(sx==null)return;const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40)step(dx<0?1:-1);sx=null});
+
+const bw=$('#bw'),bc=$('#bw-count');let popped=0,total=0,ac=null;
+function snd(){try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();const n=ac.currentTime,o=ac.createOscillator(),g=ac.createGain();o.type='triangle';o.frequency.setValueAtTime(420+Math.random()*260,n);o.frequency.exponentialRampToValueAtTime(80,n+.07);g.gain.setValueAtTime(.18,n);g.gain.exponentialRampToValueAtTime(.001,n+.08);o.connect(g).connect(ac.destination);o.start(n);o.stop(n+.09)}catch(e){}}
+function upd(){bc.textContent=popped+' estourado'+(popped===1?'':'s')}
+function sheet(){bw.innerHTML='';popped=0;total=innerWidth<520?48:72;
+  for(let k=0;k<total;k++){const b=document.createElement('button');b.type='button';b.className='bub';b.setAttribute('aria-label','bolha');
+    b.addEventListener('pointerdown',()=>{if(b.classList.contains('pop'))return;b.classList.add('pop');snd();popped++;upd();if(popped===total)flash('Estourou tudo! Disciplina de atleta 💪')});bw.appendChild(b)}upd()}
+sheet();$('#bw-reset').onclick=sheet;
+
+const dov=$('#diary-overlay');
+$$('[data-diary-open]').forEach(b=>b.addEventListener('click',()=>{dov.classList.add('is-open');dov.setAttribute('aria-hidden','false')}));
+const dclose=()=>{dov.classList.remove('is-open');dov.setAttribute('aria-hidden','true')};
+$$('[data-diary-close]').forEach(b=>b.addEventListener('click',dclose));
+
+const K=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];let kp=0;
+const ko=$('#konami-overlay');const kclose=()=>ko.classList.remove('is-open');
+ko.addEventListener('click',e=>{if(e.target===ko||e.target.closest('#konami-close'))kclose()});
+addEventListener('keydown',e=>{
+  if(/input|textarea/i.test(e.target.tagName))return;
+  const key=e.key.length===1?e.key.toLowerCase():e.key;
+  const wasMid=kp>0;
+  kp=key===K[kp]?kp+1:(key===K[0]?1:0);
+  if(kp===K.length){ko.classList.add('is-open');kp=0;return}
+  if(e.key==='Escape'){close();kclose();dclose();return}
+  if(lb.classList.contains('lb-open')){if(e.key==='ArrowRight')step(1);if(e.key==='ArrowLeft')step(-1);return}
+  if(key==='c'&&!wasMid&&!e.metaKey&&!e.ctrlKey&&!e.altKey)copy();
+});
+})();
+</script>
+</body>
+</html>
